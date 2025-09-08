@@ -13,3 +13,6 @@
 - **c^make_v**: Per-unit costs when making (materials + labor + overhead per unit)
 
 ---
+
+Case 1: Always MAKE (Equation 4.3)
+When: c^make_f ≤ c^buy_f AND c^make_v ≤ c^buy_v
