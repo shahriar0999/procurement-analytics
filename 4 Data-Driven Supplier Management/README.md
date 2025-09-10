@@ -1,4 +1,4 @@
-# Real-World Make-vs-Buy Decision Cases
+# Real-World Make-vs-Buy Decision Cases.
 
 ## Understanding the Cost Equations First
 
