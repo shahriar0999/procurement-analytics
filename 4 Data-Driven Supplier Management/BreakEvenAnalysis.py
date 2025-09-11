@@ -52,3 +52,44 @@ class MakeBuyCalculator:
                     # Case 3: x > (c^make_f - c^buy_f) / (c^buy_v - c^make_v)  
                     if c_buy_v > c_make_v:  # Ensure denominator is positive
                         break_even_point = (c_make_f - c_buy_f) / (c_buy_v - c_make_v)
+
+        # store results
+        self.results['breakeven'] = {
+            'c_make_f': c_make_f,
+            'c_make_v': c_make_v,
+            'c_buy_f': c_buy_f,
+            'c_buy_v': c_buy_v,
+            'volumes': volumes,
+            'make_costs': make_costs,
+            'buy_costs': buy_costs,
+            'break_even_point': break_even_point,
+            'decision_case': decision_case,
+            'cost_estimation': {
+                'buy': f"c_buy = {c_buy_f} + {c_buy_v} * x",
+                'make': f"c_make = {c_make_f} + {c_make_v} * x"
+            }
+        }
+    
+    def _determine_decision_case(self, c_make_f, c_make_v, c_buy_f, c_buy_v):
+        """
+        Determine which decision case applies based on equations 4.3-4.6
+        """
+        
+        # Case 1: Always MAKE (Equation 4.3)
+        if c_make_f <= c_buy_f and c_make_v <= c_buy_v:
+            return 'case_1_always_make'
+        
+        # Case 2: MAKE if quantity is small (Equations 4.4-4.5) 
+        elif c_make_f <= c_buy_f and c_make_v > c_buy_v:
+            return 'case_2'
+            
+        # Case 3: MAKE if quantity is large (Equation 4.6)
+        elif c_make_f > c_buy_f and c_make_v < c_buy_v:
+            return 'case_3'
+            
+        # Case 4: Always BUY
+        else: # c_make_f > c_buy_f and c_make_v >= c_buy_v
+            return 'case_4_always_buy'
+        
+
+        
